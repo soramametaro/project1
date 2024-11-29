@@ -1,7 +1,9 @@
 def str2words(doc, stop):
-    words = []
+    important_words = []
     for token in T.tokenize(doc):
-        if token.part_of_speech == '形容詞,自立' or token.part_of_speech == '動詞,自立' or token.part_of_speech == '名詞':
-            words.append(token.base_form)
-    important_words = [word for word in words if word != stop]
+        if '形容詞,自立' in str(token.part_of_speech) or '動詞,自立' in str(token.part_of_speech) or '名詞' in str(token.part_of_speech):
+            important_words.append(token.base_form)
+    for stop_word in stop:
+        if stop_word in important_words:
+            important_words.remove(stop_word)
     return important_words
